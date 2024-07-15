@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/axios.min.js"></script>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="./js/bootstrap.min.js"></script>
+    <link href="./css/mdui.min.css" rel="stylesheet">
+    <script src="./js/mdui.global.min.js"></script>
+    <script src="./js/download.min.js"></script>
+    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+    <title>码语库记-历史版本</title>
+    <style>
+        .main {
+            width: 100%;
+            height: auto;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media screen and (max-width:480px) {
+            .main {
+                width: 85vw;
+            }
+            .main .item{
+                width: 85vw;
+            }
+        }
+
+        .top {
+            width: 100%;
+            height: 100%;
+            background-color: #e4e4e4;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: all .5s;
+            z-index: 10;
+        }
+
+        .main .item {
+            width: 60%;
+            height: auto;
+            padding: 10px;
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <div class="position-relative" style="height: 100%;">
+            <div class="position-absolute top-50 start-50 translate-middle">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="main mdui-theme-light" id="main">
+        <div class="item" style="margin-bottom: 10px;">
+
+            <h4>全部版本：</h4>
+        </div>
+
+    </div>
+</body>
+
+<script>
+    let all_v = "https://gitee.com/api/v5/repos/xiaowumin-mark/CodeSpeak-LibraryNotes/releases?page=1&per_page=100"
+    //let data = [{ "id": 417598, "tag_name": "0.1.0", "target_commitish": "e99f6c3c8b7796840a25597022589949465fe11d", "prerelease": false, "name": "test", "body": "这是一个测试releases", "author": { "id": 12615033, "login": "xiaowumin-mark", "name": "xiaowumin-mark", "avatar_url": "https://foruda.gitee.com/avatar/1704084604389219776/12615033_xiaowumin_1704084604.png", "url": "https://gitee.com/api/v5/users/xiaowumin-mark", "html_url": "https://gitee.com/xiaowumin-mark", "remark": "", "followers_url": "https://gitee.com/api/v5/users/xiaowumin-mark/followers", "following_url": "https://gitee.com/api/v5/users/xiaowumin-mark/following_url{/other_user}", "gists_url": "https://gitee.com/api/v5/users/xiaowumin-mark/gists{/gist_id}", "starred_url": "https://gitee.com/api/v5/users/xiaowumin-mark/starred{/owner}{/repo}", "subscriptions_url": "https://gitee.com/api/v5/users/xiaowumin-mark/subscriptions", "organizations_url": "https://gitee.com/api/v5/users/xiaowumin-mark/orgs", "repos_url": "https://gitee.com/api/v5/users/xiaowumin-mark/repos", "events_url": "https://gitee.com/api/v5/users/xiaowumin-mark/events{/privacy}", "received_events_url": "https://gitee.com/api/v5/users/xiaowumin-mark/received_events", "type": "User" }, "created_at": "2024-07-12T12:25:43+08:00", "assets": [{ "browser_download_url": "https://gitee.com/xiaowumin-mark/CodeSpeak-LibraryNotes/releases/download/0.1.0/eMule0.70a-Installer.exe", "name": "eMule0.70a-Installer.exe" }, { "browser_download_url": "https://gitee.com/xiaowumin-mark/CodeSpeak-LibraryNotes/archive/refs/tags/0.1.0.zip", "name": "0.1.0.zip" }, { "browser_download_url": "https://gitee.com/xiaowumin-mark/CodeSpeak-LibraryNotes/archive/refs/tags/0.1.0.tar.gz", "name": "0.1.0.tar.gz" }] }, { "id": 417964, "tag_name": "0.1.1", "target_commitish": "ea0da9cd2f33a8298ac85244ffd7fa520ede279a", "prerelease": false, "name": "0.1.1", "body": "test", "author": { "id": 12615033, "login": "xiaowumin-mark", "name": "xiaowumin-mark", "avatar_url": "https://foruda.gitee.com/avatar/1704084604389219776/12615033_xiaowumin_1704084604.png", "url": "https://gitee.com/api/v5/users/xiaowumin-mark", "html_url": "https://gitee.com/xiaowumin-mark", "remark": "", "followers_url": "https://gitee.com/api/v5/users/xiaowumin-mark/followers", "following_url": "https://gitee.com/api/v5/users/xiaowumin-mark/following_url{/other_user}", "gists_url": "https://gitee.com/api/v5/users/xiaowumin-mark/gists{/gist_id}", "starred_url": "https://gitee.com/api/v5/users/xiaowumin-mark/starred{/owner}{/repo}", "subscriptions_url": "https://gitee.com/api/v5/users/xiaowumin-mark/subscriptions", "organizations_url": "https://gitee.com/api/v5/users/xiaowumin-mark/orgs", "repos_url": "https://gitee.com/api/v5/users/xiaowumin-mark/repos", "events_url": "https://gitee.com/api/v5/users/xiaowumin-mark/events{/privacy}", "received_events_url": "https://gitee.com/api/v5/users/xiaowumin-mark/received_events", "type": "User" }, "created_at": "2024-07-13T18:26:01+08:00", "assets": [{ "browser_download_url": "https://gitee.com/xiaowumin-mark/CodeSpeak-LibraryNotes/releases/download/0.1.1/bdcamsetup.exe", "name": "bdcamsetup.exe" }, { "browser_download_url": "https://gitee.com/xiaowumin-mark/CodeSpeak-LibraryNotes/releases/download/0.1.1/windowsappruntimeinstall-x64.exe", "name": "windowsappruntimeinstall-x64.exe" }, { "browser_download_url": "https://gitee.com/xiaowumin-mark/CodeSpeak-LibraryNotes/archive/refs/tags/0.1.1.zip", "name": "0.1.1.zip" }, { "browser_download_url": "https://gitee.com/xiaowumin-mark/CodeSpeak-LibraryNotes/archive/refs/tags/0.1.1.tar.gz", "name": "0.1.1.tar.gz" }] }]
+    let main = document.getElementById("main")
+    document.addEventListener("DOMContentLoaded", () => {
+        let m = main.innerHTML
+        axios({
+            url: all_v,
+            methods: "get",
+        }).then(res => {
+            data = res.data
+            for (var i= data.length-1;i>=0;i--) {
+                let file = data[i].assets
+                let f = ''
+                for (let j = 0; j < file.length; j++) {
+                    f += `
+                <mdui-list-item onclick="window.download('${file[j].browser_download_url}','${file[j].name}')">${file[j].name}</mdui-list-item>
+                `
+                }
+                m += `
+            <mdui-card class="item">
+            <h6 style="margin-bottom: 10px;margin-left: 15px;">版本: <span>${data[i].tag_name}</span></h6>
+            <div style="width: auto;height: auto;display: flex;">
+                <div style="width: 50px;height: 30px;margin-left: 15px;">
+                    <h6>内容:</h6>
+                </div>
+                <div style="width: calc(100% - 80px);">
+                    <h6>
+                      ${data[i].body}  
+                    </h6>
+                </div>
+            </div>
+
+            <mdui-list>
+                ${f}
+            </mdui-list>
+
+        </mdui-card>
+            `
+            }
+            main.innerHTML = m
+
+            setTimeout(() => {
+                document.querySelector(".top").style.opacity = 0;
+                setTimeout(()=>document.querySelector(".top").style.display = "none",500)
+            }, 2000)
+        })
+
+
+
+    })
+
+</script>
+
+</html>

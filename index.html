@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-cn" class="mdui-theme-dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>码语库记</title>
+    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./icon.png" type="image/x-icon">
+    <script src="./js/download.min.js"></script>
+    <script src="./js/axios.min.js"></script>
+    <link rel="stylesheet" href="./css/mdui.min.css">
+    <script src="./js/mdui.global.min.js"></script>
+</head>
+
+<body>
+
+    <div class="header">
+
+        <div class="left">
+            <div class="logo">
+                <img src="./icon.png" />
+            </div>
+            <div class="title">
+                <p>码语库记</p>
+            </div>
+
+        </div>
+
+        <div class="right">
+            <div class="item">
+                <p class="button-text" onclick="d()">下载软件</p>
+            </div>
+            <div class="item">
+                <a target="_blank" href="./hv.html" class="button-text">历史版本</a>
+            </div>
+            <div class="item">
+                <a target="_blank" href="https://gitee.com/xiaowumin-mark/CodeSpeak-LibraryNotes/"
+                    class="button-text">开源地址</a>
+            </div>
+            <mdui-dropdown>
+                <div id="oth" class="item" slot="trigger">
+
+                    <svg width="25" height="25" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.94971 11.9497H39.9497" stroke="#ffffff" stroke-width="3" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M7.94971 23.9497H39.9497" stroke="#ffffff" stroke-width="3" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M7.94971 35.9497H39.9497" stroke="#ffffff" stroke-width="3" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                    <br style="clear:both;" />
+                </div>
+                <mdui-menu>
+                    <mdui-menu-item onclick="d()">下载软件</mdui-menu-item>
+                    <mdui-menu-item onclick="window.open('./hv.html')">历史版本</mdui-menu-item>
+                    <mdui-menu-item
+                        onclick="window.open('https://gitee.com/xiaowumin-mark/CodeSpeak-LibraryNotes/')">开源地址</mdui-menu-item>
+                </mdui-menu>
+            </mdui-dropdown>
+        </div>
+    </div>
+
+    <div class="l">
+        <span class="tl">码语库记</span>
+        <p class="lp">码语库记：编程智慧与心得的宝库
+            码语库记，一个专为程序员设计的工具，助你轻松记录代码片段、理解库文件并分享学习心得。无论是学习新技能、解决难题还是记录成长，这里都是你的理想之地，让学习无处不在。加入码语库记，开启你的编程智慧之旅！</p>
+        <div class="bt">
+            <div class="bit" style="background-color: #ff8585;" onclick="d()">
+                <p style="color: #ededed;font-size: 16px;line-height: 38px;">下载码语库记</p>
+            </div>
+            <div class="bit c" onclick="window.open('https://gitee.com/xiaowumin-mark/CodeSpeak-LibraryNotes/')">
+                <p style="color: #ededed;font-size: 16px;line-height: 38px;">开源仓库</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="r">
+        <div class="element pab">
+
+        </div>
+        <div class="pab">
+            <img src="./icon.png" alt="" class="pab-i">
+        </div>
+    </div>
+    <div style="width: 100%;height: 50px;position: absolute;bottom: 0;">
+        <p style="text-align: center;font-size: 13px;color: #484848;">Released under the MIT license
+            <br>
+            Copyright © 2024 CodeSpeak-LibraryNotes
+        </p>
+    </div>
+
+</body>
+<script>
+    function d() {
+        axios({
+            url: "https://gitee.com/api/v5/repos/xiaowumin-mark/CodeSpeak-LibraryNotes/releases/latest",
+            medhod: "get"
+        }).then(res => {
+            if (res.data.length < 1) {
+                alert("没有发布软件哦~")
+                return
+            }
+            let data = res.data.assets
+            for (let i = 0; i < data.length; i++) {
+                let a = data[i];
+                if (a.browser_download_url.includes(".exe")) {
+                    download(a.browser_download_url, a.name)
+                    return
+                }
+            }
+            alert("没有发布软件哦~")
+        }).catch(err => {
+            alert("网络错误，请稍后再试~")
+        })
+    }
+</script>
+
+</html>
