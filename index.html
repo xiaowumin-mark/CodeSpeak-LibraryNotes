@@ -103,14 +103,33 @@
                 return
             }
             let data = res.data.assets
+            let is_az = false
+            let is_have = false
+            let id_i = 0
             for (let i = 0; i < data.length; i++) {
                 let a = data[i];
-                if (a.browser_download_url.includes(".exe")) {
-                    download(a.browser_download_url, a.name)
-                    return
+                if (a.name.includes(".exe")) {
+
+                    is_have = true
+
+                    id_i = i
+                    if (a.name.includes("安装")) {
+                        //download(a.browser_download_url, a.name)
+                        is_az = true
+                        if (is_have) {
+                            let id_i = i
+                            break
+                        }
+                    }
                 }
             }
-            alert("没有发布软件哦~")
+            if (!is_have) {
+                alert("没有发布软件哦~")
+            }
+            let a = data[id_i]
+            download(a.browser_download_url, a.name)
+            console.log(a);
+
         }).catch(err => {
             alert("网络错误，请稍后再试~")
         })
